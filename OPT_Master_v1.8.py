@@ -55,54 +55,6 @@ def randomgen():
 
 def Exceptions():
    
-    #### LTAS #####
-    
-    #EOP18="Follow SID. "
-    EOP36="Special SID procedure for all conditions: Climb on RWY track – crossing R080 CAY LT follow D2.1 CAY Arc – crossing R043 CAY RT 350 to follow the river northbound."
-    cexc=conn.cursor()
-    cexc.execute("DELETE from EOProced WHERE Code='LTAS' AND ID='18TMP'")
-    cexc.execute("DELETE from EOProced WHERE Code='LTAS' AND ID='36TMP'")
-    #cexc.execute("UPDATE EOProced SET EOProc=? WHERE Code='LTAS' AND ID='18'", [EOP18])
-    cexc.execute("UPDATE EOProced SET EOProc=? WHERE Code='LTAS' AND ID='36'", [EOP36])
-    cexc.execute("DELETE from GAProced WHERE Code='LTAS' AND ID='18TMP'")
-    cexc.execute("DELETE from GAProced WHERE Code='LTAS' AND ID='36TMP'")
-    cexc.execute("DELETE from NOTAMinfo WHERE Code='LTAS' AND ID='18TMP'")
-    cexc.execute("DELETE from NOTAMinfo WHERE Code='LTAS' AND ID='36TMP'")
-    cexc.execute("DELETE from ObstInfo WHERE Code=?", ['LTAS'])
-    random_int1=randomgen()
-    cexc.execute("""INSERT INTO ObstInfo (Code, ID, ProcedureID, Number, Dist, Ht, LatOffset)
-    VALUES('LTAS','18',"",?,3100,330,0)""",[random_int1])
-    conn.commit()
-    random_int2=randomgen()
-    cexc.execute("""INSERT INTO ObstInfo (Code, ID, ProcedureID, Number, Dist, Ht, LatOffset)
-    VALUES('LTAS','36',"",?,2800,386,0)""",[random_int2])
-    cexc.execute("DELETE from RwyInfo WHERE Code='LTAS' AND ID='18TMP'")
-    cexc.execute("DELETE from RwyInfo WHERE Code='LTAS' AND ID='36TMP'")
-    conn.commit()
-
-    #### LTAU #####
-
-    EOP07="NON-STD. At D3.0 KSR turn LEFT to KSR HP. D116.3 KSR HP: Inbound 250° RIGHT turn."
-    EOP25="NON-STD. At D8.0 KSR turn RIGHT to KSR HP. D116.3 KSR HP: Inbound 250° RIGHT turn."
-    
-    cexc.execute("UPDATE EOProced SET EOProc=? WHERE Code='LTAU' AND ID='07'", [EOP07])
-    cexc.execute("UPDATE EOProced SET EOProc=? WHERE Code='LTAU' AND ID='25'", [EOP25])
-    cexc.execute("DELETE from ObstInfo WHERE Code=?", ['LTAU'])
-    dist07=(403, 499,517)
-    ht07=(12, 15, 25)
-    dist25=(4286, 4263,4249, 4255, 4454)
-    ht25=(187, 186, 183, 182, 252)
-    for cntex1 in range(len(dist07)):
-        random_int3=randomgen()
-        cexc.execute("""INSERT INTO ObstInfo (Code, ID, ProcedureID, Number, Dist, Ht, LatOffset)
-        VALUES('LTAU','07',"",?,?,?,0)""",[random_int3, dist07[cntex1], ht07[cntex1]])
-        conn.commit()
-
-    for cntex2 in range(len(dist25)):
-        random_int4=randomgen()
-        cexc.execute("""INSERT INTO ObstInfo (Code, ID, ProcedureID, Number, Dist, Ht, LatOffset)
-        VALUES('LTAU','25',"",?,?,?,0)""",[random_int4, dist25[cntex2], ht25[cntex2]])
-        conn.commit()
 
 
     #### GLRB #####
